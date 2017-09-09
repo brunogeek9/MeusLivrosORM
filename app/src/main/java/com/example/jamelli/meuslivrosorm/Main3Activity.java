@@ -12,6 +12,7 @@ import com.orm.SugarContext;
 import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class Main3Activity extends AppCompatActivity {
 
@@ -34,32 +35,6 @@ public class Main3Activity extends AppCompatActivity {
         cont = 0;
         livros = (ArrayList<Livro>) Livro.listAll(Livro.class);
 
-        bnt_voltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(cont < 1){
-                    bnt_voltar.setEnabled(false);
-                }else{
-                    bnt_proximo.setEnabled(true);
-                    cont--;
-                    exibir(cont);
-                }
-            }
-        });
-
-        bnt_proximo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(cont >= livros.size()-1){
-                    bnt_proximo.setEnabled(false);
-                }else{
-                    bnt_voltar.setEnabled(true);
-                    cont++;
-                    exibir(cont);
-                }
-            }
-        });
-
         if(livros.size() == 0) {
             Intent intent = new Intent();
             setResult(RESULT_CANCELED,intent);
@@ -71,10 +46,32 @@ public class Main3Activity extends AppCompatActivity {
     }
 
     public void exibir(int x){
-        tv_titulo.setText(livros.get(x).titulo);
-        tv_autor.setText(livros.get(x).autor);
-        tv_ano.setText(String.valueOf(livros.get(x).ano));
-        tv_nota.setText(String.valueOf(livros.get(x).nota));
+        tv_titulo.setText(livros.get(x).getTitulo());
+        tv_autor.setText(livros.get(x).getAutor());
+        tv_ano.setText(String.valueOf(livros.get(x).getAno()));
+        tv_nota.setText(String.valueOf(livros.get(x).getNota()));
+    }
+
+    @OnClick(R.id.button5)
+    public void anterior(){
+        if(cont < 1){
+            bnt_voltar.setEnabled(false);
+        }else{
+            bnt_proximo.setEnabled(true);
+            cont--;
+            exibir(cont);
+        }
+    }
+
+    @OnClick(R.id.button6)
+    public void proximo(){
+        if(cont >= livros.size()-1){
+            bnt_proximo.setEnabled(false);
+        }else{
+            bnt_voltar.setEnabled(true);
+            cont++;
+            exibir(cont);
+        }
     }
 
     @Override

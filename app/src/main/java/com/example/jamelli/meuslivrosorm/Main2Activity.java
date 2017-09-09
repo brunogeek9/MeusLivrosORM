@@ -31,34 +31,29 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         ButterKnife.bind(this);
 
+    }
 
+    @OnClick(R.id.button3)
+    public void salvar(){
+        String titulo_ = titulo.getText().toString();
+        String autor_ = autor.getText().toString();
+        int ano_ = Integer.valueOf(ano.getText().toString());
+        float nota_ = nota.getRating();
+        Livro livro = new Livro(titulo_,autor_,ano_,nota_);
 
-        bntSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String titulo_ = titulo.getText().toString();
-                String autor_ = autor.getText().toString();
-                int ano_ = Integer.valueOf(ano.getText().toString());
-                float nota_ = nota.getRating();
-                Livro livro = new Livro(titulo_,autor_,ano_,nota_);
+        livro.save(livro);
 
-                livro.save(livro);
+        Log.i("salvo",livro.toString());
+        Intent i = new Intent();
+        setResult(RESULT_OK,i);
+        finish();
+    }
 
-                Log.i("salvo",livro.toString());
-                Intent i = new Intent();
-                setResult(RESULT_OK,i);
-                finish();
-            }
-        });
-
-        bntCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent();
-                setResult(RESULT_CANCELED,i);
-                finish();
-            }
-        });
+    @OnClick(R.id.button4)
+    public void cancelar(){
+        Intent i = new Intent();
+        setResult(RESULT_CANCELED,i);
+        finish();
     }
 
     @Override

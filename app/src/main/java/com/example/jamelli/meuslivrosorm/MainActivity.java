@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
     static final int tela1 = 1;
@@ -22,26 +23,24 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tela)
     protected ConstraintLayout tela;
 
+    @OnClick(R.id.button)
+    public void callCadastro(){
+        Intent i = new Intent(MainActivity.this,Main2Activity.class);
+        startActivityForResult(i,tela1);
+    }
+
+    @OnClick(R.id.button2)
+    public void callLista(){
+        Intent i = new Intent(MainActivity.this,Main3Activity.class);
+        startActivity(i);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        bnt_cad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,Main2Activity.class);
-                startActivityForResult(i,tela1);
-            }
-        });
 
-        bnt_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,Main3Activity.class);
-                startActivity(i);
-            }
-        });
 
     }
 
